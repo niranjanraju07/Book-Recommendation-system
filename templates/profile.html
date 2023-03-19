@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <title>User</title>
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+       <style>
+        body{
+            background-color: #141b29;
+        }
+        
+        .reco{
+            background-color: #192133;
+            color: white;
+            display: flex;
+        }
+        .img1{
+            float: left;
+            padding:20px;
+        }
+        .tit1{
+            float: right;
+            padding: 20px;
+        }
+        .img2{
+            height: 30px;
+            width: 40px;
+            margin: auto;
+            padding: auto;
+        }
+        .dropbtn {
+            background-color: #141b29;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            
+        }
+
+        .dropdown {
+            position: relative;
+            display: block;
+            margin-left: 20vw
+        }
+
+        .dropdown-content {
+            display: none;
+            position: fixed;
+            background-color: #192133;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px #192133;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+.dropdown-content a:hover {background-color: #141b29;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #192133;}
+
+.user-logo{
+    margin: auto;
+    padding: 20px;
+    height: 50vh;
+    width: 25vw;
+}
+.icon-img{
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+}
+</style>
+    </head>
+<body>
+       <div style="position: fixed; top: 0; overflow: hidden; z-index: 2;">
+        <nav class="navbar navbar-default" style="background-color: #141b29; border-color: #141b29;">
+            <div class="container-fluid">
+                <div class="navbar-header" style="display: flex;">
+                    
+                        
+                        <a class="navbar-brand" href="#" style="float: left;">
+                            <img alt="Brand" src="{{url_for('static', filename='logo.png')}}" class="img2">
+                        </a>
+                        <a class="navbar-brand" href="#" style="color: white; margin-right: 10vw;">Recommender</a>
+                        
+                        
+                        <form class="navbar-form navbar-left" role="search">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search" style="width: 30vw;">
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </form>
+                        <div class="dropdown" style="float: right;">
+                            <button class="dropbtn">{{user_id}}</button>
+                            <div class="dropdown-content" style="z-index: 2;">
+                                <a href="#">Home</a>
+                                <a href="{{url_for('home')}}">Log out</a>
+                            </div>
+                        </div>                      
+                </div>
+            </div>
+        </nav>
+    </div><br><br><br>
+<div class="container" style="background-color: #192133; padding: 30px;">
+<H4 style="color: white;">Profile</H4>
+<hr>
+<div class="row">
+    <div class="col-lg-4" style="background-color: #141b29; width:30vw; height: 60vh; padding: 20px; border-radius: 20px; margin-left: 20px;">
+        <img src="{{url_for('static', filename='user.png')}}" alt="Profile" class="user-logo">
+    </div>
+
+    <div class="col-lg-7" style="background-color: #141b29; height: 60vh; padding: 20px; border-radius: 20px;margin-left: 30px;">
+        <div class="row">
+            <div class="col-md-3" ><h4 style="color: white;">User-id:</h4></div>
+            <div class="col-md-8" ><h5 style="color: white;">{{user_id}}</h5></div>
+        </div>
+        <div class="row">
+            <div class="col-md-3" ><h4 style="color: white;">Age:</h4></div>
+            <div class="col-md-8" ><h5 style="color: white;">{{age}}</h5></div>
+        </div>
+        <div class="row">
+            <div class="col-md-3" ><h4 style="color: white;">City:</h4></div>
+            <div class="col-md-8" ><h5 style="color: white;">{{city}}</h5></div>  
+        </div>
+        <div class="row">
+        <div class="col-md-3" ><h4 style="color: white;">State:</h4></div>
+        <div class="col-md-8" ><h5 style="color: white;">{{state}}</h5></div></div>
+        <div class="row">
+            <div class="col-md-3" ><h4 style="color: white;">Country:</h4></div>
+            <div class="col-md-8" ><h5 style="color: white;">{{country}}</h5></div>
+        </div>
+        <div class="row">
+            <div class="col-md-3" ><h4 style="color: white;">Total Ratings:</h4></div>
+            <div class="col-md-8" ><h5 style="color: white;">{{t_ratings}}</h5></div>
+        </div>
+    </div> 
+</div>
+<hr>
+</div>
+<br>
+<br>
+<br>
+<div class="container" style="background-color: #192133; padding: 30px;">
+    <h4 style="color: white;">Ratings</h4>
+    <hr>
+    <div class="row" style="background-color: #141b29;">
+        <div class="col-md-2" style="margin: auto;"></div>
+        <div class="col-md-8" style="margin: auto"><h4 style="color: white;">Title</h4></div>
+        <div class="col-md-2" style="margin: auto"><h4 style="color: white;">Ratings</h4></div>
+    </div>
+    {% if book_title|length >0 %}
+    {% for i in range(book_title|length)%}
+    <br>
+    <div class="row" style="background-color: #141b29;">
+        <div class="col-md-2" style="margin: auto;"><img src="{{image[i]}}" alt="img" class="icon-img"></div>
+        <div class="col-md-8" style="margin: auto">
+            <div style="padding: 10px;">
+            <h4 style="color: white;">{{book_title[i]}}</h4>
+            <p style="color: whitesmoke;">{{author[i]}}, {{publisher[i]}}</p>
+        </div>
+        </div>
+        <div class="col-md-2" style="margin: auto"><h4 style="color: white; padding: 10px;">{{ratings[i]}}</h4></div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <hr>
+</div>
+
+</body>

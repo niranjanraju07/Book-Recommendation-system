@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Book recommendation System
+        </title>
+        <style>
+            body{
+                background-color: black;
+            }
+            .d1{
+                background-color: brown;
+                color: black;
+                width: 99vw;
+                padding: 3px;
+                height: 10vh;
+                text-align: center;
+                
+
+            }
+            .d2{
+                align-items: center;
+                text-align: center;
+                color: black;
+                width: auto;
+                height: auto;
+                border: 2px ;
+                background-color: rgb(243, 188, 116);
+                border-radius: 20px;
+                padding: 15px;
+                margin: auto;
+
+                
+                       
+            }
+            .d3{
+                background-image: url("{{ url_for('static', filename='bg2.jpg')}}");
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                width: 99vw;
+                height: 85vh;
+                display: flex;
+                margin: auto;
+            }
+            .b1{
+                margin: auto;
+                padding: 20px;
+                background-color: brown;
+                border-radius: 10px;
+            }
+            .l1{
+               
+               padding: 5px; 
+            }
+            .i1{
+                margin: auto;
+                padding: 20px;
+                color: black;
+                border-radius: 10px;
+                background-color: burlywood;
+            }
+            .b1:hover{
+                background-color: lightblue;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="header" class="d1">
+        <h1 texta> Welcome to book recommendation system</h1><br>
+        </div>
+        <div id="bgimg" class="d3">
+            <div class="d2">
+                <form action="{{url_for('user')}}" method="post">
+                    <h1>User details</h1>
+                    <label class="l1">User ID:</label>
+                    <input class="i1" type="text" name="user_input" placeholder="Enter your user id" required="required"/><br><br>
+                    <button type="submit" class="b1">Recommend</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
